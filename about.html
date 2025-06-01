@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - A.D.M School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            padding: 1rem 8%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo container */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* Logo styling */
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 2px solid white;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .logo-inner {
+            background: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #2b5876;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* About Page Specific Styles */
+        .about-hero {
+            background: linear-gradient(rgba(43, 88, 118, 0.85), rgba(78, 67, 118, 0.85)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover;
+            padding: 6rem 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 2px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+
+.breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #ffd700;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #2b5876;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #4e4376;
+            border-radius: 2px;
+        }
+
+        .about-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2b5876;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: #4e4376;
+            font-weight: 500;
+        }
+
+        .values-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .value-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            color: #2b5876;
+            margin-bottom: 1rem;
+        }
+
+        .value-desc {
+            color: #6c757d;
+            line-height: 1.7;
+        }
+
+        .team-section {
+            background: #f0f4f8;
+            padding: 5rem 5%;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+
+.member-name {
+            font-size: 1.3rem;
+            color: #2b5876;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: #4e4376;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .member-desc {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            color: white;
+            padding: 3rem 8% 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-about,
+        .footer-links,
+        .footer-social {
+            flex: 1 1 250px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a,
+        .footer-social a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover,
+        .footer-social a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero-section {
+                padding: 6rem 5% 3rem;
+                flex-direction: column;
+            }
+            
+            .profile-pic {
+                width: 100%;
+                height: auto;
+                margin-top: 20px;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="logo-inner">ADM</div>
+                </div>
+                <div class="logo-text">A.D.M School</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="vvvvvv.html">Home</a></li>
+                <li><a href="about.html" class="active">About us</a></li>
+                <li><a href="sign up.html">Sign Up</a></li>
+                <li><a href="home.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+<section class="about-hero">
+        <h1>About Our School</h1>
+        <p class="content-text">Discover the story behind our commitment to excellence in education</p>
+        <div class="breadcrumb">
+            <a href="vvvvvv.html">Home</a>
+            <span>&gt;</span>
+            <a href="about.html">About Us</a>
+        </div>
+    </section>
+
+    <section class="about-content">
+        <div class="section-title">
+            <h2>Our Story</h2>
+        </div>
+        <p class="about-text">Founded in 1998, A.D.M School has been at the forefront of educational excellence for nearly two decades. What began as a small neighborhood learning center has grown into a premier educational institution serving over 1,200 students across grades K-12.</p>
+        <p class="about-text">Our journey has been guided by a simple yet powerful vision: to create an environment where every student can discover their unique potential and develop the skills necessary to thrive in an ever-changing world. We believe that education should be transformative, empowering students not just academically, but socially, emotionally, and ethically as well.</p>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">18+</div>
+                <div class="stat-text">Years of Excellence</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1,200+</div>
+                <div class="stat-text">Students Enrolled</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">85</div>
+                <div class="stat-text">Dedicated Faculty</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">97%</div>
+                <div class="stat-text">Graduation Rate</div>
+            </div>
+        </div>
+        
+        <div class="section-title">
+            <h2>Our Mission & Vision</h2>
+        </div>
+        <p class="about-text">At A.D.M School, our mission is to empower students to become critical thinkers, lifelong learners, and responsible global citizens through a comprehensive educational experience that balances academic rigor with character development.</p>
+        <p class="about-text">Our vision is to be recognized as a leader in innovative education, creating a learning community where every student achieves their highest potential and develops the skills, knowledge, and values to make a positive impact on the world.</p>
+        
+        <div class="section-title">
+            <h2>Our Core Values</h2>
+        </div>
+        <div class="values-container">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="value-title">Academic Excellence</h3>
+                <p class="value-desc">We maintain the highest standards of academic achievement while fostering intellectual curiosity and a love for learning.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="value-title">Inclusive Community</h3>
+                <p class="value-desc">We celebrate diversity and create an environment where every student feels valued, respected, and supported.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="value-title">Innovative Learning</h3>
+                <p class="value-desc">We embrace innovative teaching methods and technologies to prepare students for the challenges of tomorrow.</p>
+</div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3 class="value-title">Character Development</h3>
+                <p class="value-desc">We emphasize integrity, empathy, and social responsibility as essential components of education.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="team-section">
+        <div class="team-container">
+            <div class="section-title">
+                <h2>Our Leadership Team</h2>
+            </div>
+            <p class="about-text" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Meet the dedicated professionals who guide our school with vision and expertise.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Principal" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Dr. Samuel Bekele</h3>
+                        <p class="member-role">Principal</p>
+                        <p class="member-desc">With 25 years of educational leadership experience, Dr. Bekele leads our school with a focus on innovation and student-centered learning.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Vice Principal" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Ms. Aisha Mohammed</h3>
+                        <p class="member-role">Vice Principal</p>
+                        <p class="member-desc">Ms. Mohammed specializes in curriculum development and student support services, ensuring every child receives personalized attention.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Academic Director" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Mr. Daniel Tadesse</h3>
+                        <p class="member-role">Academic Director</p>
+                        <p class="member-desc">Mr. Tadesse brings a passion for STEM education and oversees our innovative learning programs across all grade levels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>About Us</h3>
+                <p>© 2025 A.D.M School. All rights reserved. Committed to educational excellence since 2005. For any queries or assistance, please contact us at info@admschool.com or call +251 91-874-4573</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="vvvvvv.html">Home</a></li>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="sign up.html">Sign Up</a></li>
+                    <li><a href="home.html">Login</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+</div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 A.D.M School. All rights reserved.
+              <p align="center"> made by: EYOB MUCHE</p>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Score List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #e6f0ff, #ffffff);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    /* Navigation Header - Corrected */
+    .nav-header {
+      background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+      padding: 1.2rem 8%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: #ffd700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 8px 5px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: #ffd700;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Highlight active page */
+    .nav-links a.active {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .list {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .list h2 {
+      text-align: center;
+      color: #1a73e8;
+      margin-bottom: 25px;
+      font-size: 2.2rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .list h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, #1a73e8, #4e4376);
+      border-radius: 2px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 16px;
+      margin-bottom: 25px;
+      border: 1px solid #ccc;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: #1a73e8;
+      box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2);
+    }
+
+    .student-container {
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    /* Scrollbar styling */
+    .student-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .student-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    .student-container::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+
+    .student-container::-webkit-scrollbar-thumb:hover {
+      background: #a0a0a0;
+    }
+
+    .student {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, #d9ecff, #eaf4ff);
+      margin-bottom: 15px;
+      padding: 18px 25px;
+      border-left: 5px solid #1a73e8;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+.student:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(to right, #b3d8ff, #d0e8ff);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      border-left: 5px solid #ffd700;
+    }
+
+    .student-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .student-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4e4376, #2b5876);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .student-name {
+      font-size: 18px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .student button {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+    }
+
+    .student button:hover {
+      background-color: #0e53b7;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(26, 115, 232, 0.4);
+    }
+
+    .student button i {
+      margin-left: 8px;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+      font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 1.2rem;
+      }
+      
+      .nav-links a {
+        font-size: 0.95rem;
+      }
+      
+      .logo {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+        margin-top: 80px;
+      }
+      
+      .nav-header {
+        padding: 1rem 5%;
+      }
+      
+      .nav-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .list {
+        padding: 20px;
+        margin: 20px auto;
+      }
+      
+      .student {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .student button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Corrected Header -->
+  <header class="nav-header">
+    <nav class="nav-container">
+      <div class="logo">
+        <i class="fas fa-graduation-cap"></i> 
+        A.D.M School
+      </div>
+      <ul class="nav-links">
+        <li><a href="vvvvvv.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="list.html" class="active">Students List</a></li>
+        <li><a href="vvvvvv.html">Logout <i class="fas fa-sign-out-alt"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="list">
+    <h2>Student Score List</h2>
+    <input type="text" id="searchInput" class="search-box" placeholder="Search for a student...">
+    
+    <div class="student-container">
+      <!-- Student entries -->
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">N</div>
+          <span class="student-name">Nati</span>
+        </div>
+        <button onclick="requestPin('nati.html')">See Score <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">E</div>
+          <span class="student-name">Eyob</span>
+        </div>
+        <button onclick="requestPin('eyob.html')">See Score <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">R</div>
+          <span class="student-name">Robel</span>
+        </div>
+        <button onclick="requestPin('robel.html')">See Score <i class="fas fa-arrow-right"></i></button>
+
+
+</div>
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">NT</div>
+          <span class="student-name">Natenael Tadese</span>
+        </div>
+        <button onclick="requestPin('n1.html')">See Score <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">S</div>
+          <span class="student-name">Saleamlak</span>
+        </div>
+        <button onclick="requestPin('sale.html')">See Score <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">B</div>
+          <span class="student-name">Bisrat</span>
+        </div>
+        <button onclick="requestPin('bisre.html')">See Score <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">ND</div>
+          <span class="student-name">Natenael Dawit</span>
+        </div>
+        <button onclick="requestPin('natenael.html')">See Score <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="student">
+        <div class="student-info">
+          <div class="student-avatar">BM</div>
+          <span class="student-name">Bemnet</span>
+        </div>
+        <button onclick="requestPin('results.html')">See Score <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const studentItems = document.querySelectorAll('.student');
+
+    searchInput.addEventListener('keyup', function() {
+      const filter = searchInput.value.toLowerCase();
+      let hasResults = false;
+      
+      studentItems.forEach(student => {
+        const name = student.querySelector('.student-name').textContent.toLowerCase();
+        if (name.includes(filter)) {
+          student.style.display = 'flex';
+          hasResults = true;
+        } else {
+          student.style.display = 'none';
+        }
+      });
+      
+      // Show no results message
+      const noResults = document.querySelector('.no-results');
+      if (!hasResults) {
+        if (!noResults) {
+          const container = document.querySelector('.student-container');
+          const message = document.createElement('div');
+          message.className = 'no-results';
+          message.innerHTML = '<i class="fas fa-user-graduate" style="font-size: 3rem; margin-bottom: 15px;"></i><p>No students found matching your search</p>';
+          container.appendChild(message);
+        }
+      } else if (noResults) {
+        noResults.remove();
+      }
+    });
+
+    function requestPin(targetPage) {
+      const pin = prompt("Enter your PIN to view the score:");
+      if (pin === null || pin.trim() === "") {
+        alert("PIN entry canceled or empty.");
+        return;
+      }
+
+      // In a real application, you would validate the PIN on the server
+      if (pin === "1234") {
+        window.location.href = targetPage;
+      } else {
+        alert("Incorrect PIN. Access denied.");
+      }
+    }
+    
+    // Add click event to entire student card
+    studentItems.forEach(student => {
+      student.addEventListener('click', (e) => {
+        // Only trigger if the click wasn't on the button
+        if (!e.target.closest('button')) {
+          const button = student.querySelector('button');
+          button.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
